@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "ScholarPortal.Services.Identity.Infrastructure";
+
+package QueryUsers;
+
+service QueryUsersService {
+    
+    rpc GetUser (UserRequest) returns (UserModel);
+}
+
+message UserRequest {
+    string identityId  = 1;
+}
+
+message UserModel {
+    string identityId = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string socialSecurityNumber = 4;
+    google.protobuf.Timestamp birthdate = 5;
+    string email = 6;
+    google.protobuf.Timestamp created = 7;
+    string status = 8;
+    string employeeId = 9;
+    message UserRolesModel {
+        string role = 1;
+    }
+
+    repeated UserRolesModel roles = 10;
+}
