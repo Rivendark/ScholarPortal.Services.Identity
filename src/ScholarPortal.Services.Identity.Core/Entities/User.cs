@@ -9,19 +9,22 @@ namespace ScholarPortal.Services.Identity.Core.Entities
 	{
 		private ISet<string> _roles = new HashSet<string>();
 		public Guid Id { get; private set; }
+		//TODO create function for Personal Information change (FirstName, LastName, Email)
 		public string FirstName { get; private set; }
 		public string LastName { get; private set; }
 		public string SocialSecurityNumber { get; private set; }
 		public DateTime Birthdate { get; private set; }
 		public string Email { get; private set; }
+		//TODO create function for Password change
 		public string Password { get; private set; }
-		public DateTime PasswordChanged { get; private set; }
-		public Guid RegistrationToken { get; private set; }
-		public DateTime RegistrationTokenCreated { get; private set; }
-		public UserStatus Status { get; private set; }
-		public DateTime? SuspendedUntil { get; private set; }
+		public DateTime? PasswordChanged { get; private set; }
+		//TODO create function for RegistrationToken creation.
+		public Guid? RegistrationToken { get; private set; }
+		public DateTime? RegistrationTokenCreated { get; private set; }
+		public UserStatus Status { get; set; }
+		public DateTime? SuspendedUntil { get; set; }
 		public DateTime Created { get; set; }
-		public Guid EmployeeId { get; private set; }
+		public Guid? EmployeeId { get; set; }
 
 		public ISet<string> Roles
 		{
@@ -84,10 +87,10 @@ namespace ScholarPortal.Services.Identity.Core.Entities
 			UserStatus status,
 			IEnumerable<string> roles,
 			DateTime created,
-			DateTime passwordChanged,
-			Guid registrationToken,
-			DateTime registrationTokenCreated,
-			Guid employeeId,
+			DateTime? passwordChanged,
+			Guid? registrationToken,
+			DateTime? registrationTokenCreated,
+			Guid? employeeId,
 			DateTime? suspendedUntil = null
 		) {
 			if (string.IsNullOrWhiteSpace(email))

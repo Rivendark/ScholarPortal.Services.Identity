@@ -6,7 +6,9 @@ using Convey;
 using Convey.CQRS.Commands;
 using Convey.CQRS.Events;
 using Convey.CQRS.Queries;
+using Convey.Discovery.Consul;
 using Convey.HTTP;
+using Convey.LoadBalancing.Fabio;
 using Convey.MessageBrokers;
 using Convey.MessageBrokers.CQRS;
 using Convey.MessageBrokers.Outbox;
@@ -34,6 +36,7 @@ using ScholarPortal.Services.Identity.Infrastructure.Logging;
 using ScholarPortal.Services.Identity.Infrastructure.Mongo.Documents;
 using ScholarPortal.Services.Identity.Infrastructure.Mongo.Repositories;
 using ScholarPortal.Services.Identity.Infrastructure.Services;
+using QueryUsersService = ScholarPortal.Protos.Users.QueryUsersService;
 
 namespace ScholarPortal.Services.Identity.Infrastructure
 {
@@ -53,6 +56,8 @@ namespace ScholarPortal.Services.Identity.Infrastructure
 				.AddQueryHandlers()
 				.AddInMemoryQueryDispatcher()
 				.AddHttpClient()
+				.AddConsul()
+				.AddFabio()
 				.AddRabbitMq(plugins: p => p.AddJaegerRabbitMqPlugin())
 				.AddMessageOutbox(o => o.AddMongo())
 				.AddMongo()
@@ -72,7 +77,8 @@ namespace ScholarPortal.Services.Identity.Infrastructure
 				.UseMetrics()
 				.UseRabbitMq()
 				.SubscribeCommand<CreateUser>()
-				.SubscribeEvent<EmployeeCreated>();
+				.SubscribeEvent<EmployeeCreated>()
+				.SubscribeEvent<EmployeeAdded>();
 			return app;
 		}
 		

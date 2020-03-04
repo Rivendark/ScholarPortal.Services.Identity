@@ -8,14 +8,14 @@ namespace ScholarPortal.Services.Identity.Application.DTO
 	{
 		private ISet<string> _roles = new HashSet<string>();
 		public Guid Id { get; private set; }
-		public string FirstName { get; private set; }
-		public string LastName { get; private set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
 		public string SocialSecurityNumber { get; private set; }
 		public DateTime Birthdate { get; private set; }
-		public string Email { get; private set; }
+		public string Email { get; set; }
 		public DateTime Created { get; private set; }
-		public UserStatus Status { get; private set; }
-		public Guid EmployeeId { get; private set; }
+		public UserStatus Status { get; set; }
+		public Guid? EmployeeId { get; set; }
 
 		public UserDto()
 		{

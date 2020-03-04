@@ -5,11 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Convey" Version="0.4.258" />
-      <PackageReference Include="Convey.CQRS.Commands" Version="0.4.258" />
-      <PackageReference Include="Convey.CQRS.Events" Version="0.4.258" />
-      <PackageReference Include="Convey.CQRS.Queries" Version="0.4.258" />
-      <PackageReference Include="Convey.MessageBrokers" Version="0.4.258" />
+      <PackageReference Include="Convey" Version="0.4.273" />
+      <PackageReference Include="Convey.CQRS.Commands" Version="0.4.273" />
+      <PackageReference Include="Convey.CQRS.Events" Version="0.4.273" />
+      <PackageReference Include="Convey.CQRS.Queries" Version="0.4.273" />
+      <PackageReference Include="Convey.MessageBrokers" Version="0.4.273" />
+      <PackageReference Include="Grpc.Core" Version="1.12.0" />
     </ItemGroup>
 
     <ItemGroup>

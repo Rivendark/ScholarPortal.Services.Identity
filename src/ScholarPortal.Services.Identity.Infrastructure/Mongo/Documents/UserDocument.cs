@@ -16,13 +16,13 @@ namespace ScholarPortal.Services.Identity.Infrastructure.Mongo.Documents
 		public DateTime Birthdate { get; private set; }
 		public string Email { get; private set; }
 		public string Password { get; private set; }
-		public DateTime PasswordChanged { get; private set; }
-		public Guid RegistrationToken { get; private set; }
-		public DateTime RegistrationTokenCreated { get; private set; }
+		public DateTime? PasswordChanged { get; private set; }
+		public Guid? RegistrationToken { get; private set; }
+		public DateTime? RegistrationTokenCreated { get; private set; }
 		public UserStatus Status { get; private set; }
 		public DateTime? SuspendedUntil { get; private set; }
 		public DateTime Created { get; private set; }
-		public Guid EmployeeId { get; private set; }
+		public Guid? EmployeeId { get; private set; }
 
 		public ISet<string> Roles
 		{
@@ -40,10 +40,10 @@ namespace ScholarPortal.Services.Identity.Infrastructure.Mongo.Documents
 			UserStatus status,
 			IEnumerable<string> roles,
 			DateTime created,
-			DateTime passwordChanged,
-			Guid registrationToken,
-			DateTime registrationTokenCreated,
-			Guid employeeId,
+			DateTime? passwordChanged,
+			Guid? registrationToken,
+			DateTime? registrationTokenCreated,
+			Guid? employeeId,
 			DateTime? suspendedUntil = null
 		) {
 			if (string.IsNullOrWhiteSpace(email))

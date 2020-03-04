@@ -7,10 +7,13 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ScholarPortal.Services.Identity.Application;
 using ScholarPortal.Services.Identity.Infrastructure;
-using QueryUsersService = ScholarPortal.Services.Identity.Infrastructure.Services.QueryUsersService;
+using ScholarPortal.Services.Identity.Infrastructure.Services;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace ScholarPortal.Services.Identity.Api
 {
@@ -23,10 +26,16 @@ namespace ScholarPortal.Services.Identity.Api
 		
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 			=> WebHost.CreateDefaultBuilder(args)
+				.ConfigureKestrel(options =>
+				{
+					options.ListenAnyIP(80,o => o.Protocols = HttpProtocols.Http1AndHttp2);
+					options.ListenAnyIP(5001,o => o.Protocols = HttpProtocols.Http2);
+				})
+				.ConfigureLogging(logging => { logging.AddFilter("Grpc", LogLevel.Debug); })
 				.ConfigureServices(services =>
 				{
 					services
-						.AddGrpc();
+						.AddGrpc(options => { options.EnableDetailedErrors = true; });
 					services
 						.AddConvey()
 						.AddWebApi()

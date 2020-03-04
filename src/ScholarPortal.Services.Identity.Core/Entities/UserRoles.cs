@@ -11,18 +11,23 @@ namespace ScholarPortal.Services.Identity.Core.Entities
 		public const string Administrator = "administrator";
 		public const string SuperAdministrator = "superadministrator";
 
-		private static readonly IEnumerable<string> RoleList = new List<string>()
+		private static readonly IDictionary<int, string> RoleList = new Dictionary<int, string>()
 		{
-			Faculty,
-			Student,
-			Staff,
-			Administrator,
-			SuperAdministrator
+			{0, Student},
+			{1, Staff},
+			{2, Faculty},
+			{3, Administrator},
+			{4, SuperAdministrator}
 		};
+
+		public static bool IsValid(int role)
+		{
+			return RoleList.ContainsKey(role);
+		}
 
 		public static bool IsValid(string role)
 		{
-			return !string.IsNullOrWhiteSpace(role) && RoleList.Contains(role.ToLowerInvariant());
+			return RoleList.Any(r => r.Value == role);
 		}
 	}
 }
